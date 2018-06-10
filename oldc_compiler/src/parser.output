@@ -1,0 +1,368 @@
+Nonterminals useless in grammar
+
+   RETURN_STATEMENT
+   FACTOR
+
+
+Terminals unused in grammar
+
+   COMMA
+   RETURN
+
+
+Rules useless in grammar
+
+   18 RETURN_STATEMENT: RETURN NUM SEMIC
+
+   19 FACTOR: L_BRAC R_BRAC
+   20       | L_BRAC TYPE_SPEC VAR R_BRAC
+
+
+Rules useless in parser due to conflicts
+
+    5 DECLARATION: TYPE_SPEC VAR EQ NUM SEMIC STATEMENT
+
+
+State 25 conflicts: 2 reduce/reduce
+
+
+Grammar
+
+    0 $accept: ROOT $end
+
+    1 ROOT: STATEMENT
+
+    2 STATEMENT: DECLARATION
+    3          | FUNC
+
+    4 DECLARATION: TYPE_SPEC VAR EQ NUM SEMIC STATEMENT
+    5            | TYPE_SPEC VAR EQ NUM SEMIC STATEMENT
+    6            | TYPE_SPEC VAR SEMIC
+
+    7 FUNC: TYPE_SPEC VAR L_BRAC R_BRAC SCOPE
+
+    8 SCOPE: L_CURLY DECLARATION R_CURLY
+
+    9 TYPE_SPEC: VOID
+   10          | CHAR
+   11          | SHORT
+   12          | INT
+   13          | LONG
+   14          | FLOAT
+   15          | DOUBLE
+   16          | SIGNED
+   17          | UNSIGNED
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+VAR (258) 4 5 6 7
+NUM (259) 4 5
+EQ (260) 4 5
+SEMIC (261) 4 5 6
+COMMA (262)
+L_BRAC (263) 7
+R_BRAC (264) 7
+L_CURLY (265) 8
+R_CURLY (266) 8
+VOID (267) 9
+CHAR (268) 10
+SHORT (269) 11
+INT (270) 12
+LONG (271) 13
+FLOAT (272) 14
+DOUBLE (273) 15
+SIGNED (274) 16
+UNSIGNED (275) 17
+RETURN (276)
+
+
+Nonterminals, with rules where they appear
+
+$accept (22)
+    on left: 0
+ROOT (23)
+    on left: 1, on right: 0
+STATEMENT (24)
+    on left: 2 3, on right: 1 4 5
+DECLARATION (25)
+    on left: 4 5 6, on right: 2 8
+FUNC (26)
+    on left: 7, on right: 3
+SCOPE (27)
+    on left: 8, on right: 7
+TYPE_SPEC (28)
+    on left: 9 10 11 12 13 14 15 16 17, on right: 4 5 6 7
+
+
+State 0
+
+    0 $accept: . ROOT $end
+
+    VOID      shift, and go to state 1
+    CHAR      shift, and go to state 2
+    SHORT     shift, and go to state 3
+    INT       shift, and go to state 4
+    LONG      shift, and go to state 5
+    FLOAT     shift, and go to state 6
+    DOUBLE    shift, and go to state 7
+    SIGNED    shift, and go to state 8
+    UNSIGNED  shift, and go to state 9
+
+    ROOT         go to state 10
+    STATEMENT    go to state 11
+    DECLARATION  go to state 12
+    FUNC         go to state 13
+    TYPE_SPEC    go to state 14
+
+
+State 1
+
+    9 TYPE_SPEC: VOID .
+
+    $default  reduce using rule 9 (TYPE_SPEC)
+
+
+State 2
+
+   10 TYPE_SPEC: CHAR .
+
+    $default  reduce using rule 10 (TYPE_SPEC)
+
+
+State 3
+
+   11 TYPE_SPEC: SHORT .
+
+    $default  reduce using rule 11 (TYPE_SPEC)
+
+
+State 4
+
+   12 TYPE_SPEC: INT .
+
+    $default  reduce using rule 12 (TYPE_SPEC)
+
+
+State 5
+
+   13 TYPE_SPEC: LONG .
+
+    $default  reduce using rule 13 (TYPE_SPEC)
+
+
+State 6
+
+   14 TYPE_SPEC: FLOAT .
+
+    $default  reduce using rule 14 (TYPE_SPEC)
+
+
+State 7
+
+   15 TYPE_SPEC: DOUBLE .
+
+    $default  reduce using rule 15 (TYPE_SPEC)
+
+
+State 8
+
+   16 TYPE_SPEC: SIGNED .
+
+    $default  reduce using rule 16 (TYPE_SPEC)
+
+
+State 9
+
+   17 TYPE_SPEC: UNSIGNED .
+
+    $default  reduce using rule 17 (TYPE_SPEC)
+
+
+State 10
+
+    0 $accept: ROOT . $end
+
+    $end  shift, and go to state 15
+
+
+State 11
+
+    1 ROOT: STATEMENT .
+
+    $default  reduce using rule 1 (ROOT)
+
+
+State 12
+
+    2 STATEMENT: DECLARATION .
+
+    $default  reduce using rule 2 (STATEMENT)
+
+
+State 13
+
+    3 STATEMENT: FUNC .
+
+    $default  reduce using rule 3 (STATEMENT)
+
+
+State 14
+
+    4 DECLARATION: TYPE_SPEC . VAR EQ NUM SEMIC STATEMENT
+    5            | TYPE_SPEC . VAR EQ NUM SEMIC STATEMENT
+    6            | TYPE_SPEC . VAR SEMIC
+    7 FUNC: TYPE_SPEC . VAR L_BRAC R_BRAC SCOPE
+
+    VAR  shift, and go to state 16
+
+
+State 15
+
+    0 $accept: ROOT $end .
+
+    $default  accept
+
+
+State 16
+
+    4 DECLARATION: TYPE_SPEC VAR . EQ NUM SEMIC STATEMENT
+    5            | TYPE_SPEC VAR . EQ NUM SEMIC STATEMENT
+    6            | TYPE_SPEC VAR . SEMIC
+    7 FUNC: TYPE_SPEC VAR . L_BRAC R_BRAC SCOPE
+
+    EQ      shift, and go to state 17
+    SEMIC   shift, and go to state 18
+    L_BRAC  shift, and go to state 19
+
+
+State 17
+
+    4 DECLARATION: TYPE_SPEC VAR EQ . NUM SEMIC STATEMENT
+    5            | TYPE_SPEC VAR EQ . NUM SEMIC STATEMENT
+
+    NUM  shift, and go to state 20
+
+
+State 18
+
+    6 DECLARATION: TYPE_SPEC VAR SEMIC .
+
+    $default  reduce using rule 6 (DECLARATION)
+
+
+State 19
+
+    7 FUNC: TYPE_SPEC VAR L_BRAC . R_BRAC SCOPE
+
+    R_BRAC  shift, and go to state 21
+
+
+State 20
+
+    4 DECLARATION: TYPE_SPEC VAR EQ NUM . SEMIC STATEMENT
+    5            | TYPE_SPEC VAR EQ NUM . SEMIC STATEMENT
+
+    SEMIC  shift, and go to state 22
+
+
+State 21
+
+    7 FUNC: TYPE_SPEC VAR L_BRAC R_BRAC . SCOPE
+
+    L_CURLY  shift, and go to state 23
+
+    SCOPE  go to state 24
+
+
+State 22
+
+    4 DECLARATION: TYPE_SPEC VAR EQ NUM SEMIC . STATEMENT
+    5            | TYPE_SPEC VAR EQ NUM SEMIC . STATEMENT
+
+    VOID      shift, and go to state 1
+    CHAR      shift, and go to state 2
+    SHORT     shift, and go to state 3
+    INT       shift, and go to state 4
+    LONG      shift, and go to state 5
+    FLOAT     shift, and go to state 6
+    DOUBLE    shift, and go to state 7
+    SIGNED    shift, and go to state 8
+    UNSIGNED  shift, and go to state 9
+
+    STATEMENT    go to state 25
+    DECLARATION  go to state 12
+    FUNC         go to state 13
+    TYPE_SPEC    go to state 14
+
+
+State 23
+
+    8 SCOPE: L_CURLY . DECLARATION R_CURLY
+
+    VOID      shift, and go to state 1
+    CHAR      shift, and go to state 2
+    SHORT     shift, and go to state 3
+    INT       shift, and go to state 4
+    LONG      shift, and go to state 5
+    FLOAT     shift, and go to state 6
+    DOUBLE    shift, and go to state 7
+    SIGNED    shift, and go to state 8
+    UNSIGNED  shift, and go to state 9
+
+    DECLARATION  go to state 26
+    TYPE_SPEC    go to state 27
+
+
+State 24
+
+    7 FUNC: TYPE_SPEC VAR L_BRAC R_BRAC SCOPE .
+
+    $default  reduce using rule 7 (FUNC)
+
+
+State 25
+
+    4 DECLARATION: TYPE_SPEC VAR EQ NUM SEMIC STATEMENT .
+    5            | TYPE_SPEC VAR EQ NUM SEMIC STATEMENT .
+
+    $end      reduce using rule 4 (DECLARATION)
+    $end      [reduce using rule 5 (DECLARATION)]
+    R_CURLY   reduce using rule 4 (DECLARATION)
+    R_CURLY   [reduce using rule 5 (DECLARATION)]
+    $default  reduce using rule 4 (DECLARATION)
+
+
+State 26
+
+    8 SCOPE: L_CURLY DECLARATION . R_CURLY
+
+    R_CURLY  shift, and go to state 28
+
+
+State 27
+
+    4 DECLARATION: TYPE_SPEC . VAR EQ NUM SEMIC STATEMENT
+    5            | TYPE_SPEC . VAR EQ NUM SEMIC STATEMENT
+    6            | TYPE_SPEC . VAR SEMIC
+
+    VAR  shift, and go to state 29
+
+
+State 28
+
+    8 SCOPE: L_CURLY DECLARATION R_CURLY .
+
+    $default  reduce using rule 8 (SCOPE)
+
+
+State 29
+
+    4 DECLARATION: TYPE_SPEC VAR . EQ NUM SEMIC STATEMENT
+    5            | TYPE_SPEC VAR . EQ NUM SEMIC STATEMENT
+    6            | TYPE_SPEC VAR . SEMIC
+
+    EQ     shift, and go to state 17
+    SEMIC  shift, and go to state 18

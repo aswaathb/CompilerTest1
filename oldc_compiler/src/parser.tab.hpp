@@ -78,7 +78,8 @@ extern int yydebug;
     FLOAT = 272,
     DOUBLE = 273,
     SIGNED = 274,
-    UNSIGNED = 275
+    UNSIGNED = 275,
+    RETURN = 276
   };
 #endif
 
@@ -90,12 +91,13 @@ union YYSTYPE
 #line 17 "src/parser.y" /* yacc.c:1909  */
 
       const Expression *node;
-      variable_declaration *variable;
       double number;
       std::string *string;
+      variable_declaration *variable;
       function_definition *func;
+      return_statement *ret_state;
 
-#line 99 "src/parser.tab.hpp" /* yacc.c:1909  */
+#line 101 "src/parser.tab.hpp" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
